@@ -5,6 +5,8 @@
 **小元工作手机** 是一套面向销售团队的 **企业工作手机** 系统：管理后台 + 工作手机 APP + 定制 ROM 级管控，
 覆盖 **通话录音、微信管控、客户管理、防飞单、防删除、手机管控、SCRM 私域运营** 全链路。
 
+> 🛠️ **提供定制化需求开发** — 可按行业/流程定制工作手机功能、管理后台与对接集成。
+
 [功能总览](#-核心功能) · [管理后台](#-管理后台截图) · [工作手机-app](#-工作手机-app截图) · [行业对比](#-与同类工作手机产品) · [商务合作](#-商务合作--联系我们) · [English](#english)
 
 </div>
@@ -136,6 +138,8 @@ flowchart TB
 
 ## 🤝 商务合作 / 联系我们
 
+**提供定制化需求开发**：支持按企业行业与销售流程定制工作手机能力、管理后台报表/权限、第三方 CRM / 业务系统对接等。
+
 - 电话：`19012779793`
 - QQ：`416450997`
 - 邮箱：`416450997@qq.com`
@@ -189,6 +193,8 @@ cd app-lite && ./gradlew assembleDebug   # 七端均 assembleDebug
 ## English
 
 **Xiaoyuan Work Phone (小元工作手机)** is an enterprise *work phone* solution for sales teams in China: an admin console, an Android work-phone app and system-level device management. Features include automatic **call recording**, **WeChat monitoring & archiving**, **customer management (CRM/SCRM)**, anti-deal-diversion (防飞单) alerts, anti-deletion, app/camera/WiFi/SIM **device control**, AI conversation QA and data dashboards. It is an alternative to products in the same category such as Yunke / Xianfa / Wuji work phones.
+
+**Custom development available** — we can tailor work-phone features, admin console, and integrations to your industry and sales process.
 
 Contact: see the *商务合作* section above.
 
