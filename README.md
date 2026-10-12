@@ -91,18 +91,49 @@ APP 主要能力：一键拨号与自动 **通话录音**、客户跟进时间�
 
 ## 🤝 商务合作 / 联系我们
 
-> ⚠️ **【占位符，请替换为真实信息】**
+- 电话：`19012779793`
+- QQ：`416450997`
+- 邮箱：`416450997@qq.com`
+- 微信：扫下方二维码添加（微信号与昵称以微信为准）
 
-- 官网：`<待填写>`
-- 电话 / 微信：`<待填写>`
-- 邮箱：`<待填写>`
-- 申请演示：`<待填写：表单或二维码图片 docs/images/contact-qrcode.png>`
+![小元工作手机 微信二维码](docs/images/contact-qrcode.png)
 
 ## 🏷️ 关键词
 
 工作手机 · 小元工作手机 · 企业工作手机 · 销售工作手机 · 销售管控 · 微信管控 · 微信聊天记录存档 · 通话录音 · 客户管理 · CRM · SCRM · 私域 · 防飞单 · 防删除 · 手机管控 · 企业手机管理 · 云客工作手机替代 · 先发工作手机替代 · 无极工作手机替代
 
 ---
+
+## 📂 开源代码结构（精简版）
+
+本仓库公开的是**可运行的精简骨架**，用于展示产品信息架构与技术分层，**不包含**完整业务实现、签名证书、内部域名或客户数据。
+
+```
+xiaoyuan-work-phone/
+├── admin-lite/          # 管理后台精简版（Vue3 + Ant Design Vue，Mock 数据）
+│   ├── src/layouts/     # 侧栏布局
+│   ├── src/router/      # 路由：工作概览 / 客户 / 通话录音 / 微信管控 / 手机管控
+│   ├── src/views/       # 展示页
+│   └── src/mock/        # 本地假数据，无真实 API
+├── app-lite/            # 工作手机 APP 精简架构（Android 多模块）
+│   ├── common/          # BaseActivity、HttpClient、ApiPaths
+│   └── workbench/       # 「工作中心」演示：客户列表、通话录音（Mock）
+├── docs/images/         # 管理后台与 APP 截图、微信联系二维码
+├── README.md
+└── LICENSE
+```
+
+### 本地运行
+
+```bash
+# 管理后台精简版
+cd admin-lite && npm install && npm run dev   # http://localhost:5777
+
+# APP 精简版（需 Android SDK / JDK 17）
+cd app-lite && ./gradlew :workbench:assembleDebug
+```
+
+`app-lite` 中 `API_BASE_URL` 默认为 `https://api.example.com`，仅占位。
 
 ## English
 

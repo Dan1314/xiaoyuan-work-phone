@@ -1,6 +1,11 @@
 .DS_Store
 node_modules/
+dist/
+build/
+.gradle/
+local.properties
 .env*
 *.apk
 *.keystore
 *.jks
+.qrtmp/
