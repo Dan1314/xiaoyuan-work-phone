@@ -6,4 +6,13 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "xiaoyuan-work-phone-app-lite"
-include(":common", ":workbench")
+include(
+    ":common",
+    ":workbench",
+    ":agent",
+    ":bridge",
+    ":control",
+    ":dialer",
+    ":ota",
+    ":system",
+)

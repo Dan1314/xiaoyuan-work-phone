@@ -1,25 +1,33 @@
-# 工作手机 APP · 精简架构（`app-lite`）
+# 工作手机 APP · 七端精简架构（`app-lite`）
 
-Android 多模块骨架，演示 **小元工作手机** 端侧分层，不包含真实业务、签名配置或内部域名。
+对应正式产品七个 Android 应用进程的分层骨架，演示核心机制与 IPC，**不含**真实业务、签名证书或内部域名。
 
-## 模块
+## 七端模块
 
-| 模块 | 说明 |
-|------|------|
-| `:common` | 基类 `BaseActivity`、网络层 `HttpClient` / `ApiPaths` |
-| `:workbench` | 「工作中心」演示 App：首页、客户列表、通话录音（Mock） |
+| Gradle 模块 | 包名 | 产品名 | 示例机制 |
+|-------------|------|--------|----------|
+| `:workbench` | `com.xiaoyuan.workphone.workbench` | 工作中心 | CRM UI（Mock）、绑定 Agent AIDL |
+| `:agent` | `com.xiaoyuan.workphone.agent` | 设备服务 | 上报队列桩、AIDL `IWorkPhoneBridge` |
+| `:system` | `com.xiaoyuan.workphone.system` | 系统服务 | Config ContentProvider、通话状态观察 |
+| `:bridge` | `com.xiaoyuan.workphone.bridge` | 连接服务 | 心跳保活、策略下行广播 |
+| `:dialer` | `com.xiaoyuan.workphone.dialer` | 电话 | 通话状态监听、录音上传桩 |
+| `:control` | `com.xiaoyuan.workphone.control` | 微信管控助手 | 策略接收与应用（日志桩） |
+| `:ota` | `com.xiaoyuan.workphone.ota` | 应用更新 | 检查 / 下载 / 安装意图流程桩 |
+| `:common` | library | 公共库 | `HttpClient`、`ApiPaths`、广播常量、AIDL |
 
-## 运行
+## 构建
 
 ```bash
-# 需要本机已安装 Android SDK / JDK 17
-./gradlew :workbench:assembleDebug   # 首次请自行 gradle wrapper
+# 需要 Android SDK / JDK 17
+./gradlew assembleDebug
+# 或单模块
+./gradlew :dialer:assembleDebug :control:assembleDebug :bridge:assembleDebug
 ```
 
-`API_BASE_URL` 默认 `https://api.example.com`，仅占位，不会请求真实环境。
+`API_BASE_URL` 统一为 `https://api.example.com` 占位。
 
 ## 明确不包含
 
-- 任何 keystore / 签名配置
-- 内部 IP、正式域名、租户名、客户数据
-- 微信协议、Hook、管控策略实现
+- keystore / 签名配置
+- 内部 IP、正式域名、租户与客户数据
+- 微信协议实现、Hook、真实静默安装

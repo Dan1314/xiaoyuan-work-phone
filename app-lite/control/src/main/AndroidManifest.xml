@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@string/app_name" android:allowBackup="false">
+        <receiver android:name=".PolicyPushReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.xiaoyuan.workphone.action.POLICY_PUSH" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".PolicyApplyService" android:exported="false" />
+    </application>
+</manifest>

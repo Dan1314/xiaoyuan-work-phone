@@ -13,7 +13,7 @@ android {
         versionName = "0.1.0-demo"
         buildConfigField("String", "API_BASE_URL", "\"https://api.example.com\"")
     }
-    buildFeatures { buildConfig = true; viewBinding = true }
+    buildFeatures { buildConfig = true; viewBinding = true; aidl = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
     // 本仓库不包含任何签名配置 / keystore，请使用本地 debug 调试。

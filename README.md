@@ -79,17 +79,53 @@ APP 主要能力：一键拨号与自动 **通话录音**、客户跟进时间�
 
 ## 🏗️ 系统架构
 
-```
-┌──────────────┐   HTTPS / WebSocket   ┌──────────────────┐
-│ 工作手机 APP  │ ───────────────────▶ │  服务端 (Java)    │ ◀── 管理后台 (Vue3 + Ant Design Vue)
-│ 工作中心/拨号 │                       │  客户·通话·微信·设备 │
-│ 管控/OTA/系统 │ ◀─── 策略下发 ──────── │  AI 质检 · OpenAPI │ ──▶ 第三方 CRM / 业务系统
-└──────────────┘                       └──────────────────┘
+手机端由 **7 个 Android 应用** 协同工作（包名以正式产品为准，开源骨架见 `app-lite/`）：
+
+| 应用 | 包名（正式） | 职责 |
+|------|--------------|------|
+| 工作中心 | `com.xjy.workphone.workbench` | 员工侧 CRM / 消息 / 团队 / 管理 / 应用入口 |
+| 设备服务 | `com.xjy.workphone.agent` | 数据采集上报、配置、与各模块编排 |
+| 系统服务 | `com.xjy.workphone.system` | 企业级能力、通话/短信等系统侧支撑 |
+| 连接服务 | `com.xjy.workphone.bridge` | 长连接保活、推送与策略下行 |
+| 电话 | `com.xjy.workphone.dialer` | 外呼、通话状态、**通话录音**上传 |
+| 微信管控助手 | `com.xjy.workphone.control` | 管控策略落地（应用/相机/通讯等） |
+| 应用更新 | `com.xjy.workphone.ota` | 七端组件 OTA 检查 / 下载 / 安装 |
+
+![小元工作手机 七端架构图](docs/images/architecture-7apps.png)
+
+```mermaid
+flowchart TB
+  Admin["管理后台 Web"]
+  Server["服务端 API / Push"]
+  Admin <-->|HTTPS| Server
+
+  subgraph Phone["工作手机 · 七端 App"]
+    WB["工作中心 workbench"]
+    AG["设备服务 agent"]
+    SY["系统服务 system"]
+    BR["连接服务 bridge"]
+    DI["电话 dialer"]
+    CT["微信管控助手 control"]
+    OT["应用更新 ota"]
+  end
+
+  WB <-->|业务 API| Server
+  AG <-->|上报 / 配置| Server
+  BR <-->|心跳 / 推送| Server
+  OT <-->|检查更新| Server
+  DI -->|录音上传| Server
+
+  WB <-.->|AIDL| AG
+  AG <-.->|ContentProvider| SY
+  BR -->|策略广播| CT
+  DI -->|通话状态广播| SY
+  BR -->|策略广播| AG
+  OT -.->|更新各模块| WB
 ```
 
-- 管理后台：Vue 3 + Vite + Ant Design Vue
-- 服务端：Spring Boot + MySQL + Redis
-- 终端：Android 原生（Kotlin），支持 OPPO / vivo 等机型系统级管控
+- 管理后台：Vue 3 + Vite + Ant Design Vue（开源精简版见 `admin-lite/`）
+- 服务端：Spring Boot + MySQL + Redis（本仓库不公开完整服务端）
+- 终端：Android 原生（Kotlin），支持 OPPO / vivo 等机型系统级管控（开源骨架见 `app-lite/`）
 
 ## 🔍 与同类工作手机产品
 
@@ -124,9 +160,15 @@ xiaoyuan-work-phone/
 │   ├── src/router/      # 路由：工作概览 / 客户 / 通话录音 / 微信管控 / 手机管控
 │   ├── src/views/       # 展示页
 │   └── src/mock/        # 本地假数据，无真实 API
-├── app-lite/            # 工作手机 APP 精简架构（Android 多模块）
-│   ├── common/          # BaseActivity、HttpClient、ApiPaths
-│   └── workbench/       # 「工作中心」演示：客户列表、通话录音（Mock）
+├── app-lite/            # 工作手机七端 App 精简架构（Android 多模块）
+│   ├── common/          # HttpClient、ApiPaths、AIDL、广播常量
+│   ├── workbench/       # 工作中心：CRM Mock + 绑定 Agent AIDL
+│   ├── agent/           # 设备服务：上报桩 + AIDL Stub
+│   ├── system/          # 系统服务：Config Provider + 通话观察
+│   ├── bridge/          # 连接服务：心跳保活 + 策略广播
+│   ├── dialer/          # 电话：通话状态 + 录音上传桩
+│   ├── control/         # 微信管控助手：策略接收/应用
+│   └── ota/             # 应用更新：检查/下载/安装流程桩
 ├── docs/images/         # 管理后台与 APP 截图、微信联系二维码
 ├── README.md
 └── LICENSE
@@ -139,7 +181,7 @@ xiaoyuan-work-phone/
 cd admin-lite && npm install && npm run dev   # http://localhost:5777
 
 # APP 精简版（需 Android SDK / JDK 17）
-cd app-lite && ./gradlew :workbench:assembleDebug
+cd app-lite && ./gradlew assembleDebug   # 七端均 assembleDebug
 ```
 
 `app-lite` 中 `API_BASE_URL` 默认为 `https://api.example.com`，仅占位。
