@@ -61,12 +61,21 @@
 ## 📱 工作手机 APP截图
 
 工作手机端由「工作中心」APP + 系统级组件（拨号/录音、管控、连接服务、OTA 升级）组成，员工开箱即用。
+当前底部导航：**消息 · 团队 · 管理 · 客户 · 应用 · 我的**（截图来自 OPPO 测试机最新安装包）。
 
-| 消息 / 今日概况 | 客户列表 | 客户详情 / 跟进 | 应用 | 个人统计 |
-|---|---|---|---|---|
-| ![工作手机APP 消息](docs/images/app-message.png) | ![工作手机APP 客户](docs/images/app-customer-list.png) | ![工作手机APP 客户详情](docs/images/app-customer-detail.png) | ![工作手机APP 应用](docs/images/app-apps.png) | ![工作手机APP 统计](docs/images/app-statistics.png) |
+| 消息 / 今日概况 | 客户列表 | 客户详情 / 跟进 |
+|---|---|---|
+| ![工作手机APP 消息](docs/images/app-message.png) | ![工作手机APP 客户](docs/images/app-customer-list.png) | ![工作手机APP 客户详情](docs/images/app-customer-detail.png) |
 
-APP 主要能力：一键拨号与自动 **通话录音**、客户跟进时间轴、写跟进/附件、电话任务、现场录音、工作简报、日程与打卡、个人数据统计、微信/企微快捷联系。
+| 应用中心 | 个人统计 | 我的 |
+|---|---|---|
+| ![工作手机APP 应用](docs/images/app-apps.png) | ![工作手机APP 统计](docs/images/app-statistics.png) | ![工作手机APP 我的](docs/images/app-mine.png) |
+
+| 团队看板（新） | 管理经营数据（新） |
+|---|---|
+| ![工作手机APP 团队](docs/images/app-team.png) | ![工作手机APP 管理](docs/images/app-manage.png) |
+
+APP 主要能力：一键拨号与自动 **通话录音**、客户跟进时间轴、写跟进/附件、电话任务、现场录音、工作简报、企业公海、日程与打卡、团队/管理看板、个人数据统计（通话/短信/微信）、微信/企微快捷联系。
 
 ## 🏗️ 系统架构
 
